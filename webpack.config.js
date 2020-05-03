@@ -99,5 +99,6 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: 'true'
+  devtool: 'true',
+  watch: true
 }

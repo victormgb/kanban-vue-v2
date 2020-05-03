@@ -1,18 +1,19 @@
 <template>
   <div id="app">
-    <router-view/>
+    <Taskboard/>
   </div>
 </template>
 
 <script>
-import Dashboard from './components/Dashboard.vue'
+import Taskboard from './components/Taskboard.vue'
 import { mapGetters } from "vuex"
 import { db } from './utils/db'
 import {  mapActions } from "vuex";
 
 export default {
-  name: 'app',components: {
-    Dashboard,
+  name: 'app',
+  components:{
+    Taskboard
   },
   methods: {
     ...mapActions({
