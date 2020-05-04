@@ -25,7 +25,9 @@
         </draggable>
       </div>
     </div>
-    <TaskDetailPopup />
+    <TaskDetailPopup
+      
+     />
   </div>
 </template>
 
@@ -52,7 +54,7 @@ export default {
     return {
       projectName: "",
       projectDescription: "",
-      currentBoard:''
+      currentBoard:'',
     };
   },
   created() {
