@@ -6,6 +6,13 @@ import { db } from './../utils/db'
 
 export default {
  
+  async fetchDataBoard({commit},payload){
+    commit('SET_DATA_BOARD', payload);
+  },
+  async reorderTaskListItemsBoard({commit},payload){
+    commit('REORDER_TASKLIST_ITEMS_BOARD',payload);
+  },
+
   async fetchData({ commit }, payload) {
     // console.log('projects ', projects )
     commit("SET_LOADING_STATE", true)

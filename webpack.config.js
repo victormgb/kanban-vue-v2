@@ -3,6 +3,8 @@ var webpack = require('webpack')
 require("babel-polyfill");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+
+
 module.exports = {
   entry: ["babel-polyfill", "./src/main.js"],
   optimization: {
@@ -99,5 +101,7 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: 'true'
+  devtool: 'true',
+  watch: true,
+
 }

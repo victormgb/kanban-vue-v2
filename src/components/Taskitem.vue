@@ -2,7 +2,7 @@
   <div>
     <li class="task-item">
       <div class="task-item-header">
-        <div
+        <!--<div
           class="task-priority"
           :class="item.priority"
           v-if="showTaskPriority"
@@ -17,10 +17,14 @@
           :clearable="false"
           :closeOnSelect="true"
           class="custom-v-select"
-        ></v-select>
+        ></v-select>-->
+      <div style="text-align: right;">
+        #{{this.item.id}}
+      </div>
       </div>
       <div class="task-item-body">
-        <p class="task-title" @click="openTaskDetailPopoup(item)">{{this.item.text}}</p>
+        <!--<p class="task-title" @click="openTaskDetailPopoup(item)">{{this.item.text}}</p>-->
+        <p class="task-title" @click="openTaskDetailPopoup(item)">{{this.item.title}}</p>
         <!-- <textarea type="text" class="form-control task-title" :value="task.title" rows="2"></textarea> -->
       </div>
       <div class="task-item-footer">
