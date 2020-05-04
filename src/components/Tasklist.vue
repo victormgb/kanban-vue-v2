@@ -3,21 +3,12 @@
     <div class="task-board" :data-board-name="list.name">
       <input type="text" class="form-control" :value="this.list.name"  v-if="isEditing"  @blur="saveTaskListName">
       <div class="board-header">
-        <p class="board-name" v-if="!isEditing">{{ list.name }}</p>
+        <p class="board-name" >{{ list.name }}</p>
         
-        <div class="dropdown" v-if="!isEditing">
-          <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-ellipsis-v options" aria-hidden="true"></i>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" @click.prevent="isEditing = !isEditing">Rename</a>
-            <a class="dropdown-item" href="#"  @click.prevent="deleteWholeTaskList">Delete</a>
-          </div>
-        </div>
       </div>
       <div class="board-content">
         <ul class="task-list">
-          <draggable v-model="items" v-bind="dragOptions" class="list-group">
+          <draggable v-model="items" v-bind="dragOptions" class="list-group" @end="boardMouseupTask">
             <transition-group type="transition" :name="!drag ? 'flip-list' : null">
               <Taskitem
                 v-for="item in items"
@@ -25,17 +16,13 @@
                 :list="list"
                 :board="board"
                 :key="item.id"
+                :mousedownTask="boardMousedownTask"
+                :mouseupTask="boardMouseupTask"
               />
             </transition-group>
           </draggable>
           <taskItemTemplate v-if="showTemplate" :list="list" />
         </ul>
-      </div>
-      <div class="board-footer">
-        <a class="add-task-btn" @click="createNewTask(0)">
-          Add task
-          <span>+</span>
-        </a>
       </div>
     </div>
   </div>
@@ -104,6 +91,14 @@ export default {
       deleteTaskList:"deleteTaskList",
       reorderTaskListItemsBoard:"reorderTaskListItemsBoard"
     }),
+    boardMousedownTask(){
+      document.body.style.cursor = "move" ;
+      console.log("aaaaa")
+      
+    },
+    boardMouseupTask(){
+      document.body.style.cursor = "default" ;
+    },
     saveTaskListName(e){
      this.list.name = e.target.value  
       console.log('this.list.name', this.list.name);

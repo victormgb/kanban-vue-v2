@@ -5,16 +5,16 @@
       <div class="board-wrapper">
         <div class="board-details">
           <div class="project-name mb-2">
-            <!-- <h3 v-if="showName">{{getBoardName}}</h3> -->
-            <input type="text" :value="getBoardName" class="project-name-input form-control" @blur="editProjectName">
+            <h3>{{getBoardName}}</h3>
+            <!--<input type="text" :value="getBoardName" class="project-name-input form-control" @blur="editProjectName">-->
           </div>
-          <!-- <p class="project-description">{{projectDescription}}</p> -->
-          <input type="text" :value="projectDescription" class="project-desc-input form-control" @blur="editProjectDescription">
+          <p class="project-description">{{projectDescription}}</p>
+          <!--<input type="text" :value="projectDescription" class="project-desc-input form-control" @blur="editProjectDescription">-->
+
         </div>
-        <draggable
+        <div
           v-model="lists"
           class="row flex-nowrap"
-          v-bind="getDragOptions"
         >
           <TaskList
             v-for="(listItem, index) in lists"
@@ -22,7 +22,7 @@
             :board="getBoard"
             :list="listItem"
           ></TaskList>
-        </draggable>
+        </div>
       </div>
     </div>
     <TaskDetailPopup
@@ -74,7 +74,8 @@ export default {
           that.projectName = b.name;
           that.projectDescription = b.description;
         }
-      });*/
+      });
+      */
       this.currentBoard = this.board;
       this.projectName = this.board.name;
       this.projectDescription = this.board.description;

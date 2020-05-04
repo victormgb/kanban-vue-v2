@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @mousedown="mousedownTask" @mouseup="mouseupTask">
     <li class="task-item">
       <div class="task-item-header">
         <!--<div
@@ -36,26 +36,31 @@
             <i class="fa fa-paperclip"></i> 2
           </div>
         </div>
-        <div class="assigned-users">
-          <div class="user-avatar" v-for="(user, id) in item.assignedUsers" :key="id">
-            <img :src="user.imgURL" alt />
+        <div class="assigned-users" style="margin-right: 15px;">
+          <div class="user-avatar">
+            <img
+              src="https://lh3.googleusercontent.com/-bgFoHk_lLYY/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf2LrPUhb82RyJfhwKvr36tZ81NBg.CMID/s32-c/photo.jpg"
+              
+              alt
+            />
           </div>
-          <div class="dropdown">
-            <div
-              class="add-icon"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >+</div>
-            <div class="dropdown-menu assignee-selection" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" @click="assignUser(user)" v-for="(user, id) in item.assignedUsers" :key="id">
-                <div class="user-avatar">
-                  <img :src="user.imgURL" alt />
-                </div>
-                <p class="user-name">{{user.name}}</p>
-              </a>
-            </div>
+          <div class="user-avatar">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcfFZCBzWumfdKses7xLH669oYa6hVdNUM5WITqwPhw-wl8-EJRA"
+              
+              alt
+            />
           </div>
+          <div class="user-avatar">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj7x9Eh_d0nx-xnGCUBhcpL2_gs-_pRZAADsPDJCltX49ySU5xxA"
+              
+              alt
+            />
+          </div>
+
+
+
         </div>
       </div>
     </li>
@@ -72,7 +77,7 @@ import TaskDetailPopup from "./popups/TaskDetailPopup";
 
 export default {
   name: "Taskitem",
-  props: ["item", "list", "board"],
+  props: ["item", "list", "board","mousedownTask","mouseupTask"],
   components: {
     "v-select": vSelect,
     TaskDetailPopup
