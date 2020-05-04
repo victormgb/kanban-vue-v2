@@ -12,6 +12,11 @@ const s4 = () =>
 const guid = () => s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4()
 
 export default {
+  
+  SET_DATA_BOARD(state,payload){
+    state.board = payload;
+  },
+
   // Set Initial Data
   SET_INITIAL_DATA(state, payload) {
     console.log('payload ', payload )
@@ -133,6 +138,11 @@ export default {
     Vue.set(board.lists[listIdx], "items", payload.items)
   },
 
+  REORDER_TASKLIST_ITEMS_BOARD(state,payload){
+  const board = payload.board;
+  const listIdx = board.lists.findIndex(l => l.id == payload.listId)
+  Vue.set(board.lists[listIdx], "items", payload.items)
+  },
   // Set Active Board
   SET_ACTIVE_TASKBOARD(state, payload) {
     state.activeBoard = payload.board

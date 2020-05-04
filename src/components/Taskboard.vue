@@ -25,7 +25,9 @@
         </draggable>
       </div>
     </div>
-    <TaskDetailPopup />
+    <TaskDetailPopup
+      
+     />
   </div>
 </template>
 
@@ -52,7 +54,7 @@ export default {
     return {
       projectName: "",
       projectDescription: "",
-      currentBoard:''
+      currentBoard:'',
     };
   },
   created() {
@@ -61,18 +63,23 @@ export default {
   computed: {
     ...mapGetters({
       boards: "allBoards",
-      isLoading: "isLoading"
+      isLoading: "isLoading",
+      board: 'getBoard'
     }),
     getBoardName() {
-      let that = this;
+      /*let that = this;
       this.boards.find(function(b) {
         if (b.id == that.param) {
           that.currentBoard = b
           that.projectName = b.name;
           that.projectDescription = b.description;
         }
-      });
+      });*/
+      this.currentBoard = this.board;
+      this.projectName = this.board.name;
+      this.projectDescription = this.board.description;
       return this.projectName;
+      
     },
     getDragOptions() {
       return {
@@ -90,11 +97,13 @@ export default {
       return this.isDesktop || this.isTablet;
     },
     getBoard() {
-      return this.boards.find(b => b.id == this.param);
+      //return this.boards.find(b => b.id == this.param);
+      return this.board;
     },
     lists: {
       get() {
-        return this.getBoard ? ( this.getBoard.lists ? this.getBoard.lists.filter(l => !l.archived ) : []): [];
+        //return this.getBoard ? ( this.getBoard.lists ? this.getBoard.lists.filter(l => !l.archived ) : []): [];
+        return this.getBoard.lists
       },
       async set(value) {
         await this.reorderTaskLists({

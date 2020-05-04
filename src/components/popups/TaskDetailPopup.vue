@@ -16,7 +16,7 @@
         <div class="modal-content" v-if="isLoading">...</div>
         <div class="modal-content" v-else>
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Task Details</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Ticket #{{item.id}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -28,7 +28,7 @@
                   <img src="./../../assets/task-name.svg" class="img-task-name" />
                   Task Name
                 </h2>
-                <h2 class="task-name-text">{{item.text}}</h2>
+                <h2 class="task-name-text">{{item.title}}</h2>
               </div>
             </div>
             <div class="row">
@@ -78,6 +78,7 @@
               <div class="col-md-4">
                 <div class="due-date">
                   <h2 class="task-heading">Due Date</h2>
+                  <p>{{item.due_by}}</p>
                 </div>
               </div>
             </div>
