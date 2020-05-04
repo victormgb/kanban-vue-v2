@@ -86,11 +86,11 @@ export default {
       },
       set(reorderedListItems) {
         const payload = {
-          boardId: this.board.id,
+          board: this.board,
           listId: this.list.id,
           items: reorderedListItems
         };
-        this.reorderTaskListItems(payload);
+        this.reorderTaskListItemsBoard(payload);
       }
     },
     shouldAllowTaskItemsReorder() {
@@ -101,7 +101,8 @@ export default {
     ...mapActions({
       reorderTaskListItems: "reorderTaskListItems",
       saveTaskListItem: "saveTaskListItem",
-      deleteTaskList:"deleteTaskList"
+      deleteTaskList:"deleteTaskList",
+      reorderTaskListItemsBoard:"reorderTaskListItemsBoard"
     }),
     saveTaskListName(e){
      this.list.name = e.target.value  
