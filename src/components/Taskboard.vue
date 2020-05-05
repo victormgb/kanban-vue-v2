@@ -3,15 +3,6 @@
     <Navbar buttonType="taskboard"  />
     <div class="container-fluid main-container scrollable-div">
       <div class="board-wrapper">
-        <div class="board-details">
-          <div class="project-name mb-2">
-            <h3>{{getBoardName}}</h3>
-            <!--<input type="text" :value="getBoardName" class="project-name-input form-control" @blur="editProjectName">-->
-          </div>
-          <p class="project-description">{{projectDescription}}</p>
-          <!--<input type="text" :value="projectDescription" class="project-desc-input form-control" @blur="editProjectDescription">-->
-
-        </div>
         <div
           v-model="lists"
           class="row flex-nowrap"

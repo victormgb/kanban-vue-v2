@@ -24,28 +24,32 @@
       </div>
       <div class="task-item-body">
         <!--<p class="task-title" @click="openTaskDetailPopoup(item)">{{this.item.text}}</p>-->
-        <p class="task-title" @click="openTaskDetailPopoup(item)">{{this.item.title}}</p>
+        <a target="_blank" :href="ticketLink"><p class="task-title" >{{this.item.title}}</p></a>
         <!-- <textarea type="text" class="form-control task-title" :value="task.title" rows="2"></textarea> -->
       </div>
       <div class="task-item-footer">
         <div class="comments-attachments">
-          <div class="comments">
-            <i class="far fa-comment-alt"></i> 1
-          </div>
-          <div class="attachment">
-            <i class="fa fa-paperclip"></i> 2
-          </div>
+
+          <span style="text-align: left;">due by:</span>
+          <span style="text-align: left;">{{item.due_by | formatDate}}</span>
+
         </div>
-        <div class="assigned-users" style="margin-right: 15px;">
+        <div class="comments-attachments">
+        <span>
+          Designer: 
+        </span>
+        <div class="assigned-users" style="margin-left: auto;margin-right: auto;" >
+
           <div class="user-avatar" 
-          v-for="designer in item.designers"
           v-b-tooltip
-          :title="designer.name">
+          :title="item.designer_name">
             <img
-              :src="designer.image"
+              :src="item.avatar"
               alt
             />
           </div>
+        </div>
+
 
 
 
@@ -73,11 +77,15 @@ export default {
   data() {
     return {
       showTaskPriorityDropdown: false,
-      showTaskPriority: true
+      showTaskPriority: true,
+      ticketLink: `http://thefutures.io/tickets/${this.item.id}/show`
     };
   },
   watch: {},
   methods: {
+    openTicketInNewTab(){
+      
+    },
     assignUser(user){
       this.item.assignedUsers.push(user)
       console.log(this.item);
@@ -102,7 +110,8 @@ export default {
     }
   },
   created() {},
-  computed: {}
+  computed: {
+  }
 };
 </script>
 
@@ -113,11 +122,6 @@ export default {
   opacity:1!important;
 }
 
-.assigned-users {
-  .user-avatar {
-    margin-right: -15px;
-  }
-}
 .assigned-users .add-icon {
   margin-left: 20px;
   cursor: pointer;
@@ -138,5 +142,9 @@ export default {
     font-weight: 400;
     color: rgb(45, 45, 82);
   }
+}
+.comments-attachments {
+  flex-direction:column;
+  align-items: flex-start;
 }
 </style>
