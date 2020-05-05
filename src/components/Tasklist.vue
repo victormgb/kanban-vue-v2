@@ -8,7 +8,7 @@
       </div>
       <div class="board-content">
         <ul class="task-list">
-          <draggable v-model="items" v-bind="dragOptions" class="list-group" @end="boardMouseupTask">
+          <draggable  :component-data="getComponentData()" v-model="items" v-bind="dragOptions" class="list-group" :move="checkMove" @end="onEndDragItem">
             <transition-group type="transition" :name="!drag ? 'flip-list' : null">
               <Taskitem
                 v-for="item in items"
@@ -33,7 +33,7 @@ import draggable from "vuedraggable";
 import Taskitem from "./Taskitem";
 import taskItemTemplate from "./TaskItemTemplate";
 import { Bus } from "./../utils/bus";
-import { mapActions } from "vuex";
+import { mapActions,mapGetters } from "vuex";
 export default {
   components: {
     Taskitem,
@@ -46,13 +46,20 @@ export default {
       drag: false,
       showTemplate: false,
       isEditing: false,
-      taskListName:this.list.name
+      taskListName:this.list.name,
+      from_item:null,
+      to_item:null,
+      data_to_different_column:[]
+      
     };
   },
   created() {
     Bus.$on("remove-template", this.removeTemplate);
   },
   computed: {
+    ...mapGetters({
+      itemsToSend:"getItemsToSend"
+    }),
     defaultItem() {
       return {
         id: "",
@@ -89,11 +96,15 @@ export default {
       reorderTaskListItems: "reorderTaskListItems",
       saveTaskListItem: "saveTaskListItem",
       deleteTaskList:"deleteTaskList",
-      reorderTaskListItemsBoard:"reorderTaskListItemsBoard"
+      reorderTaskListItemsBoard:"reorderTaskListItemsBoard",
+      replaceNewItemStatus:"replaceNewItemStatus",
+      refreshDataInOtherColumn:"refreshDataInOtherColumn",
+      refreshDataInSameColumn:"refreshDataInSameColumn",
+      cleanItemsToSend:'cleanItemsToSend'
     }),
     boardMousedownTask(){
       document.body.style.cursor = "move" ;
-      console.log("aaaaa")
+      
       
     },
     boardMouseupTask(){
@@ -135,6 +146,70 @@ export default {
     },
     itemCancelled() {
       this.isEditing = false;
+    },
+    getComponentData(){
+      return{
+        attrs:{
+          list:this.list
+        }
+      }
+    },
+    checkMove(evt){
+      let from_item = this.from_item = evt.draggedContext.element;
+      
+
+      //Its means that the item is moving to other column
+      if(evt.relatedContext.component.componentData.attrs.list.name !== from_item.status) {  
+        this.data_to_different_column = [evt.relatedContext.component.componentData.attrs.list,from_item]
+      }
+    },
+    onEndDragItem(evt){
+      document.body.style.cursor = "default" ;
+      //Here start the logic
+
+      //If a ticket change of column
+      if(this.data_to_different_column.length !== 0){
+        const [list,item] = this.data_to_different_column;
+        const payload = {
+          list,
+          item
+        }
+        //replacing old status
+        this.replaceNewItemStatus(payload);
+
+        //HTTP request to change the status of one ticket
+        console.log(`axios.post('api/change-ticket-status/${item.id}')`);
+
+        const payload2 = {
+          list,
+          actualList:this.list
+        }
+        //change position of items of old column and new column
+        this.refreshDataInOtherColumn(payload2);
+
+        console.log('sending',this.itemsToSend);
+
+        this.cleanItemsToSend();
+
+        console.log(`axios.post('api/change-tickets-positions',data)`)
+
+
+      }else {
+        //change positions of items of present column
+        const payload = {
+          list:this.list
+        }
+        this.refreshDataInSameColumn(payload);
+        console.log('sending',this.itemsToSend);
+
+        this.cleanItemsToSend();
+
+        console.log(`axios.post('api/change-tickets-positions',data)`)
+
+      }
+
+
+
     }
   }
 };

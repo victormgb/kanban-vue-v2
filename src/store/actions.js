@@ -5,6 +5,22 @@ import { db } from './../utils/db'
 
 
 export default {
+
+  async cleanItemsToSend({commit}){
+    commit('CLEAM_ITEMS_SENT');
+  },
+
+  async refreshDataInSameColumn({commit},payload){
+    commit('REFRESH_DATA_SAME_COLUMN',payload);
+  },
+
+  async refreshDataInOtherColumn({commit},payload){
+    commit('REFRESH_DATA_OTHER_COLUMN',payload);
+  },
+
+  async replaceNewItemStatus({commit},payload){
+    commit('REPLACE_STATUS_ITEM_IN_LIST',payload);
+  },
  
   async fetchDataBoard({commit},payload){
     commit('SET_DATA_BOARD', payload);

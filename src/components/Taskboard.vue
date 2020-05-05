@@ -107,10 +107,11 @@ export default {
         return this.getBoard.lists
       },
       async set(value) {
-        await this.reorderTaskLists({
+        /*await this.reorderTaskLists({
           boardId: this.param,
           lists: value
-        });
+        });*/
+        console.log('list',value)
       }
     }
   },
@@ -121,24 +122,6 @@ export default {
       setActiveTaskBoard: "setActiveTaskBoard",
       saveTaskBoard:"saveTaskBoard"
     }),
-    editProjectName(e){
-      this.currentBoard.name = e.target.value.trim()
-      this.saveTaskBoard(this.currentBoard)
-    },
-    editProjectDescription(e){
-      this.currentBoard.description = e.target.value.trim()
-      this.saveTaskBoard(this.currentBoard)
-    },
-    createNewTask(key) {
-      let newTask = {
-        title: "",
-        priority: "Low",
-        comments: [],
-        attachmets: [],
-        assignedUsers: []
-      };
-      this.addTaskToBoard({ key, newTask });
-    }
   }
 };
 </script>

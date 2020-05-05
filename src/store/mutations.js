@@ -12,7 +12,49 @@ const s4 = () =>
 const guid = () => s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4()
 
 export default {
-  
+
+  CLEAM_ITEMS_SENT(state){
+    state.itemsToSend = [];
+  },
+  REFRESH_DATA_SAME_COLUMN(state,payload){
+    const board = state.board;
+    let listIdx = board.lists.findIndex(list => list.id == payload.list.id);
+    const itemsToSend = state.itemsToSend;
+
+    for(let i=0;i<board.lists[listIdx].items.length;++i){
+      let new_position = i+1;
+      board.lists[listIdx].items[i].position = new_position;
+      itemsToSend.push(board.lists[listIdx].items[i]);
+    }
+
+  },
+
+  REPLACE_STATUS_ITEM_IN_LIST(state,payload){
+    const board = state.board;
+    let listIdx = board.lists.findIndex(list => list.id == payload.list.id);
+    let itemIdx = payload.list.items.findIndex(item => item.id == payload.item.id);
+    board.lists[listIdx].items[itemIdx].status = payload.list.name;
+
+    
+
+  },
+  REFRESH_DATA_OTHER_COLUMN(state,payload){
+    const board = state.board;
+    let listIdx = board.lists.findIndex(list => list.id == payload.list.id);
+    const itemsToSend = state.itemsToSend;
+
+    for(let i=0;i<board.lists[listIdx].items.length;++i){
+      let new_position = i+1;
+      board.lists[listIdx].items[i].position = new_position;
+      itemsToSend.push(board.lists[listIdx].items[i]);
+    }
+    let listIdxActual = board.lists.findIndex(list => list.id == payload.actualList.id);
+    for(let i=0;i<board.lists[listIdxActual].items.length;++i){
+      let new_position = i+1;
+      board.lists[listIdxActual].items[i].position = new_position;
+      itemsToSend.push(board.lists[listIdxActual].items[i]);
+    }
+  },
   SET_DATA_BOARD(state,payload){
     state.board = payload;
   },

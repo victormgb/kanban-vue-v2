@@ -37,31 +37,12 @@
                   <h2 class="task-heading">Assigned Members</h2>
                   <div class="member-wrapper">
                     <ul>
-                      <li>
+                      <li v-for="designer in item.designers"
+                          v-b-tooltip
+                          :title="designer.name"
+                      >
                         <img
-                          src="https://lh3.googleusercontent.com/-bgFoHk_lLYY/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf2LrPUhb82RyJfhwKvr36tZ81NBg.CMID/s32-c/photo.jpg"
-                          class="user-img"
-                          alt
-                        />
-                      </li>
-                      <li>
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcfFZCBzWumfdKses7xLH669oYa6hVdNUM5WITqwPhw-wl8-EJRA"
-                          class="user-img"
-                          alt
-                        />
-                      </li>
-                      <li>
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj7x9Eh_d0nx-xnGCUBhcpL2_gs-_pRZAADsPDJCltX49ySU5xxA"
-                          class="user-img"
-                          alt
-                        />
-                      </li>
-
-                      <li>
-                        <img
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcfFZCBzWumfdKses7xLH669oYa6hVdNUM5WITqwPhw-wl8-EJRA"
+                          :src="designer.image"
                           class="user-img"
                           alt
                         />
@@ -87,9 +68,6 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam voluptatum rem, assumenda dolorum ratione facilis facere delectus ullam quae, harum molestias praesentium et alias, numquam deserunt ab nulla soluta eius.</p>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
@@ -129,6 +107,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.tooltip{
+  display:block!important;
+  opacity:1!important;
+}
+
 .modal.fade .modal-dialog.modal-dialog-zoom {
   -webkit-transform: translate(0, 0) scale(0.5);
   transform: translate(0, 0) scale(0.5);

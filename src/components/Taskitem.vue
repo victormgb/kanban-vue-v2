@@ -37,24 +37,12 @@
           </div>
         </div>
         <div class="assigned-users" style="margin-right: 15px;">
-          <div class="user-avatar">
+          <div class="user-avatar" 
+          v-for="designer in item.designers"
+          v-b-tooltip
+          :title="designer.name">
             <img
-              src="https://lh3.googleusercontent.com/-bgFoHk_lLYY/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf2LrPUhb82RyJfhwKvr36tZ81NBg.CMID/s32-c/photo.jpg"
-              
-              alt
-            />
-          </div>
-          <div class="user-avatar">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcfFZCBzWumfdKses7xLH669oYa6hVdNUM5WITqwPhw-wl8-EJRA"
-              
-              alt
-            />
-          </div>
-          <div class="user-avatar">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj7x9Eh_d0nx-xnGCUBhcpL2_gs-_pRZAADsPDJCltX49ySU5xxA"
-              
+              :src="designer.image"
               alt
             />
           </div>
@@ -119,6 +107,12 @@ export default {
 </script>
 
 <style scoped lang="scss" >
+
+.tooltip{
+  display:block!important;
+  opacity:1!important;
+}
+
 .assigned-users {
   .user-avatar {
     margin-right: -15px;

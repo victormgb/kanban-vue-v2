@@ -9,7 +9,7 @@ import Taskboard from './components/Taskboard.vue'
 import { mapGetters } from "vuex"
 import { db } from './utils/db'
 import {  mapActions } from "vuex";
-import dataJson from './utils/data.json'
+import {tickets} from './utils/data.js'
 
 export default {
   name: 'app',
@@ -22,9 +22,9 @@ export default {
       dataBoard: "fetchDataBoard"
     }),
     cleanedData(){
-      var tickets = dataJson;
+      var boardTickets = tickets;
       const vm = this;
-      tickets.forEach(ticket=>{
+      boardTickets.forEach(ticket=>{
         vm.board2.lists.forEach(column=>{
 
           if(ticket.status == column.name){

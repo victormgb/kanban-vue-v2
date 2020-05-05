@@ -5,6 +5,11 @@ import router from "./router"
 
 import Dashboard from './components/dashboard.vue'
 
+window.BootstrapVue = require('bootstrap-vue');
+
+// eslint-disable-next-line no-undef
+Vue.use(BootstrapVue);
+
 
 
 
